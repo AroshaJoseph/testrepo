@@ -62,6 +62,7 @@ Input(component_id='site-dropdown', component_property='value')
 )
 def get_pie(entered_site):
     filtered_df = spacex_df
+    
     if entered_site == 'All Sites':
         fig = px.pie(filtered_df, values='class', names='Launch Site', title='Total Success Launches By Site')
         return fig
@@ -84,19 +85,16 @@ Input(component_id='payload-slider', component_property='value')]
 def get_scatter_plot(entered_site, slide):
     low, high = slide
     cond = (spacex_df['Payload Mass (kg)'] > low) & (spacex_df['Payload Mass (kg)'] < high)
-    filtered_df = spacex_df[cond]
-
+    filtered_df1 = spacex_df[cond]
+    
     if entered_site == 'ALL':
-        fig1 = px.scatter(filtered_df, x='Payload Mass (kg)', y='class', color='Booster Version Category')
+        fig1 = px.scatter(filtered_df1, x='Payload Mass (kg)', y='class', color='Booster Version Category', title= 'correlation between Payloads and success for all sites')
         return fig1
     else:
         fig1 = px.scatter(
-            filtered_df[filtered_df['Launch Site']==entered_site],
-            x='Payload Mass (kg)',
-            y='class',
-            title = f"correlation between Payloads and success for all sites {entered_site}"
-            color='Booster Version Category')
-    return fig1
+            filtered_df1[filtered_df1['Launch Site']==entered_site],
+            x='Payload Mass (kg)', y='class', color='Booster Version Category', title = f"correlation between Payloads and success for all sites {entered_site}"))
+        return fig1
 
 
 # Run the app
