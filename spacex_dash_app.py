@@ -70,8 +70,7 @@ def get_pie(entered_site):
     else:
         filtered_df = spacex_df[spacex_df['Launch Site'] == entered_site].groupby(['Launch Site', 'class']). \
         size().reset_index(name='class count')
-        title = f"Total Success Launches for site {entered_site}"
-        fig = px.pie(filtered_df,values='class count', names='class', title=title)
+        fig = px.pie(filtered_df,values='class count', names='class', title=title = f"Total Success Launches for site {entered_site}")
         return fig
 
 # TASK 4:
@@ -93,7 +92,7 @@ def get_scatter_plot(entered_site, slide):
     else:
         fig1 = px.scatter(
             filtered_df1[filtered_df1['Launch Site']==entered_site],
-            x='Payload Mass (kg)', y='class', color='Booster Version Category', title = f"correlation between Payloads and success for all sites {entered_site}"))
+            x='Payload Mass (kg)', y='class', color='Booster Version Category', title = f"correlation between Payloads and success for all sites {entered_site}")
         return fig1
 
 
